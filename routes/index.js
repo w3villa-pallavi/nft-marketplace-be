@@ -8,6 +8,11 @@ const { listNfts, addNFT } = require('../handlers/market');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+/** 
+ *  API to mint an NFT token
+ * @input {file: media}
+ * @output {number: nftId, string: transactionHash, boolean: success}
+*/
 router.post('/mint', upload.single('media'), async (req, res) => {
   const ipfsMetadata = await uploadToIPFS(req.file);
   if (ipfsMetadata) {
@@ -22,6 +27,10 @@ router.post('/mint', upload.single('media'), async (req, res) => {
   }
 });
 
+/** 
+ *  API to list minted NFT token on marketplace
+ * @input {number: nftId}
+*/
 router.post('/market/add', async (req, res) => {
   const nftId = req.body.nftId;
   await addNFT(nftId);

@@ -3,6 +3,11 @@ const { NFT_STORAGE_KEY } = require("../constants");
 
 const nftStorageClient = new NFTStorage({ token: NFT_STORAGE_KEY });
 
+/** 
+ *  Add NFT media to IPFS using nft.storage
+ * @input {file: file}
+ * @output {string: url, string: key}
+*/
 const uploadToIPFS = async (file) => {
   try {
     const fileExtension = file.mimetype.split('/')[1];
