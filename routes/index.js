@@ -33,7 +33,12 @@ router.post('/mint', upload.single('media'), async (req, res) => {
 */
 router.post('/market/add', async (req, res) => {
   const nftId = req.body.nftId;
-  await addNFT(nftId);
+  const result = await addNFT(nftId);
+  if (result.success) {
+    res.json(result);
+  } else {
+    res.status(422).json(result);
+  }
 });
 
 module.exports = router;
